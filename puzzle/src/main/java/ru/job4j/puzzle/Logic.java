@@ -6,7 +6,7 @@ import ru.job4j.puzzle.firuges.Figure;
 import java.util.Arrays;
 
 /**
- * //TODO add comments.
+ * Edit method Win.
  *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
@@ -68,9 +68,43 @@ public class Logic {
         return rst;
     }
 
+    private boolean isMonoVertical(int column) {
+        boolean result = true;
+        int[][] table = this.convert();
+
+        for (int i = 0; i < table.length; i++) {
+            if (table[i][column] != 1) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    private boolean isMonoHorizontal(int row) {
+        boolean result = true;
+        int[][] table = this.convert();
+
+        for (int i = 0; i < table[row].length; i++) {
+            if (table[row][i] != 1) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+
+        for (int i = 0; i < table.length ; i++) {
+            if (isMonoHorizontal(i) || isMonoVertical(i)){
+                return true;
+            }
+        }
         return result;
     }
 
